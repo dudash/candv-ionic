@@ -1,11 +1,11 @@
 # CandV ('kand-ve) Mobile
 ## What is this?
-A simple copy and paste (ctrl+c, ctrl+v) mobile application that's setup to work with Feed Henry.
+A copy and paste mobile application with cloud sharing. Pronounced as 'kand-ve.
 
-## How can I build/run this app?
+## How can I build/run/deploy this app?
 This app build depends on the [ionic framework][3].  You will need to install that in order to build from source.  Additionally, this app is configured to be deployed and managed via [Feed Henry][4].  More info TBD.
 
-It works in conjunction with a server side backend.  Currently, you have 2 options for running a server side app: 1) run your own server or 2) use the internet accessible demo server.  You can find the source for the server [here][2] along with instructions on how to easily run the server in OpenShift.
+It works in conjunction with a server side backend.  Currently, you have 2 options for running a server side app: 1) run your own server or 2) use the internet accessible demo server I host.  To run your own, get the source for the server [here][2] along with instructions on how to easily run the server in OpenShift or as a Docker image.
 
 You can run you own Feed Henry backend service with the  following the instructions:
 TBD
