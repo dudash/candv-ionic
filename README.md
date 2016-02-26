@@ -2,6 +2,11 @@
 ## What is this?
 A copy and paste mobile application with a cloud backend. Pronounced as 'kand-ve.
 
+Initial concept sketches:
+![Screenshot CandV](./.design/initial_ui_sketch.JPG?raw=true)
+
+# UNDER CONSTRUCTION - SOME TEXT BELOW MIGHT BE INCORRECT
+
 ## How can I build/run/deploy this app?
 This app build depends on the [ionic framework][3].  You will need to install that in order to build from source.  Additionally, this app is configured to be deployed and managed via [Feed Henry][4].  More info TBD.
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.candvionic379121" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.github.dudash.candvionic" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>candv-ionic</name>
   <description>
-    A copy and paste mobile application with cloud sharing. Pronounced as 'kand-ve.
+    A copy and paste mobile application (which talks to a cloud backend). Pronounced as 'kand-ve.
   </description>
   <author email="jason.dudash@gmail.com" href="https://github.com/dudash">
     Jason Dudash

@@ -1,5 +1,21 @@
-<ion-view view-title="Playlist">
-  <ion-content>
-    <h1>Playlist</h1>
-  </ion-content>
+<ion-view view-title="Test Copy/Paste">
+	<ion-content ng-controller="CopyPasteController">
+		Tap to Copy an Item:
+	    <ion-list>
+	        <ion-item href="#" on-tap="copyText('Item 1')">
+	            Item 1
+	        </ion-item>
+	        <ion-item href="#" on-tap="copyText('Item 2')">
+	            Item 2
+	        </ion-item>
+	    </ion-list>
+	    Try Pasting Here:
+	    <label class="item item-input">
+    		<span class="input-label">Paste Here</span>
+    		<input type="text" ng-model="lastRawText">
+  		</label>
+  		<button class="button button-full button-assertive" ng-click="pasteText()">
+  		Click to Paste
+		</button>
+	</ion-content>
 </ion-view>
