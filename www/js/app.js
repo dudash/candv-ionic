@@ -46,7 +46,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/browse.html',
-          controller: 'BrowseCtrl'
+          controller: 'FHTest'
         }
       }
     })

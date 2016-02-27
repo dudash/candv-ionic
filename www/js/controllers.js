@@ -32,49 +32,73 @@ angular.module('starter.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+
+    // TODO:
+    // OAuth 2.0 Example
+    // OAuth does not require any params, instead the "authCallback" param should be set on the $fh.auth call.
+    // This should be a function name that you have defined, and will be called after Auth has completed.
+    $fh.auth({
+      "policyId": "My OAuth Policy",
+      "clientToken": "myAppId",
+      "authCallback": "authLoginCallback",
+      "endRedirectUrl": window.location.href
+    }, function () {
+      //
+    }, function () {
+      //
+    });
+    var authLoginCallback = function(err, res) {
+      if (!err) {
+        // Authentication successful - store sessionToken in variable
+        var sessionToken = res.sessionToken;
+      } else {
+        alert("Authentication failed - " + err.message);
+      }
+    }
+
   };
 })
 
-.controller('BrowseCtrl', function($scope) {
+.controller('FHTest', function($scope) {
   // add function to pass userInput to cloud via
   // $fh.cloud call to controller scope
-  $scope.sayHello = function() {
-    var userInput = $scope.userInput;
+  $scope.sayHello = function(userInput) {
+    // TODO: not sure why $scope.userInput isn't working for this model and controller?  Subscope issues?
 
     //Notifying the user that the cloud endpoint is being called.
-    $scope.noticeMessage = "Calling Cloud Endpoint";
+    $scope.noticeMessage = "trying to say hello...";
     $scope.textClassName = "ion-loading-c";
 
     // check if userInput is defined
     if (userInput) {
-      /**
-       * Pass the userInput to the service containing the $fh.cloud call.
-       *
-       * Notice that the defer.resolve and defer.reject functions are passed to the module.
-       * One of these functions will be called when the $fh.cloud function has completed successully or encountered
-       * an error.
-       */
-      fhcloud('hello', { hello: userInput })
-        .then(function(response){
+
+      var params = {
+        path: 'hello',
+        method: "GET",
+        contentType: "application/json",
+        data: { hello: userInput },
+        timeout: 15000
+      };
+
+      $fh.cloud(params, function(response) {
           // If successful, display the length  of the string.
           if (response.msg != null && typeof(response.msg) !== 'undefined') {
+            console.log("cloud API call success");
             $scope.noticeMessage = response.msg;
             $scope.textClassName = "ion-checkmark-round";
+            $scope.$apply()
           } else {
+            console.log("cloud API call error");
             $scope.noticeMessage  = "Error: Expected a message from $fh.cloud.";
             $scope.textClassName = "ion-close-round";
+            $scope.$apply()
           }
-        })
-        .catch(function(msg, err){
+        }, function(msg,err) {
           //If the cloud call fails
           $scope.noticeMessage = "$fh.cloud failed. Error: " + JSON.stringify(err);
           $scope.textClassName = "ion-close-round";
-        });
+          $scope.$apply()
+      });
     }
   };
 })
