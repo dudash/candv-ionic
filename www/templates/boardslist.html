@@ -1,0 +1,7 @@
+<ion-view view-title="Your Boards">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="board in boardslist" href="#/app/boardslist/{{board.id}}">{{board.title}}</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

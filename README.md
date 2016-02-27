@@ -4,6 +4,9 @@ A copy and paste mobile application with a cloud backend. Pronounced as 'kand-ve
 
 Initial concept sketches:
 ![Screenshot CandV](./.design/initial_ui_sketch.JPG?raw=true)
+![Screenshot CandV](./.screens/2016-02-27_2.png?raw=true)
+
+-------
 
 # UNDER CONSTRUCTION - SOME TEXT BELOW MIGHT BE INCORRECT
 

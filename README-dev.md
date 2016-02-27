@@ -18,8 +18,11 @@ You can generate all the icon sizes for this app with the following commands
 > ionic emulate ios
 > ionic emulate android
 
-## Run in Labs via Browser
+## Run in Labs via Browser (side by side)
 > ionic serve --lab
+
+## Debugging
+> ionic serve -c 
 
 ## Design/Architecture Diagrams
 You can find them in the .design folder of this project.

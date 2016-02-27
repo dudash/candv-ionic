@@ -1,10 +1,9 @@
 // CandV App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
+// 'candv' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires', e.g. 'controllers' is found in controllers.js
+angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'test.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -41,35 +40,36 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
     }
   })
 
-  .state('app.browse', {
-      url: '/browse',
+  .state('app.fhtest', {
+      url: '/fhtest',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html',
+          templateUrl: 'templates/fhtest.html',
           controller: 'FHTest'
         }
       }
     })
 
-  .state('app.playlists', {
-      url: '/playlists',
+  .state('app.board', {
+      url: '/boards/:boardId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/board.html',
+          controller: 'BoardCtrl'
         }
       }
     })
 
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+  .state('app.boardslist', {
+      url: '/boardslist',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/boardslist.html',
+          controller: 'BoardslistCtrl'
+        }
       }
-    }
-  });
+    });
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/boards/0');
 });

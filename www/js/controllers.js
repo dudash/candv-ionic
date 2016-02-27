@@ -1,6 +1,6 @@
-angular.module('starter.controllers', [])
+angular.module('controllers', ['ng-mfb'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state, $ionicHistory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -8,6 +8,9 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+
+  // Flag to say if we are logged in or not
+  $scope.isLoggedIn = false;
 
   // Form data for the login modal
   $scope.loginData = {};
@@ -25,6 +28,20 @@ angular.module('starter.controllers', [])
   };
 
   // Open the login modal
+  $scope.logout = function() {
+    // TODO: any checks for sync or popup a "are you sure" can go here
+    $scope.doLogout();
+  };
+
+  // Perform the login action when the user submits the login form
+  $scope.doLogout = function() {
+    console.log('Doing logout', $scope.loginData);
+    $scope.isLoggedIn = false;  // TODO: set this based on success/fail
+    $ionicHistory.nextViewOptions({disableBack: true});
+    $state.go('app.board', {board:0}, {location:'replace', reload:true});
+  }
+
+  // Open the login modal
   $scope.login = function() {
     $scope.modal.show();
   };
@@ -32,6 +49,10 @@ angular.module('starter.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
+    
+    $scope.isLoggedIn = true;  // TODO: set this based on success/fail
+    $ionicHistory.nextViewOptions({disableBack: true});
+    $state.go('app.boardslist');
 
     // TODO:
     // OAuth 2.0 Example
@@ -57,70 +78,68 @@ angular.module('starter.controllers', [])
     }
 
   };
+
 })
 
-.controller('FHTest', function($scope) {
-  // add function to pass userInput to cloud via
-  // $fh.cloud call to controller scope
-  $scope.sayHello = function(userInput) {
-    // TODO: not sure why $scope.userInput isn't working for this model and controller?  Subscope issues?
+.controller('BoardslistCtrl', function($scope) {
 
-    //Notifying the user that the cloud endpoint is being called.
-    $scope.noticeMessage = "trying to say hello...";
-    $scope.textClassName = "ion-loading-c";
+  // TODO: get boards we can access from server
 
-    // check if userInput is defined
-    if (userInput) {
-
-      var params = {
-        path: 'hello',
-        method: "GET",
-        contentType: "application/json",
-        data: { hello: userInput },
-        timeout: 15000
-      };
-
-      $fh.cloud(params, function(response) {
-          // If successful, display the length  of the string.
-          if (response.msg != null && typeof(response.msg) !== 'undefined') {
-            console.log("cloud API call success");
-            $scope.noticeMessage = response.msg;
-            $scope.textClassName = "ion-checkmark-round";
-            $scope.$apply()
-          } else {
-            console.log("cloud API call error");
-            $scope.noticeMessage  = "Error: Expected a message from $fh.cloud.";
-            $scope.textClassName = "ion-close-round";
-            $scope.$apply()
-          }
-        }, function(msg,err) {
-          //If the cloud call fails
-          $scope.noticeMessage = "$fh.cloud failed. Error: " + JSON.stringify(err);
-          $scope.textClassName = "ion-close-round";
-          $scope.$apply()
-      });
-    }
-  };
-})
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+  $scope.boardslist = [
+    { title: 'Global', id: 0 },
+    { title: 'Work', id: 2 },
+    { title: 'Home', id: 3 },
+    { title: 'Shared by John', id: 4 },
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('BoardCtrl', function($scope, $stateParams) {
+
+  // TODO: get this board data from server
+
+  $scope.data = {
+    showDelete: false
+  };
+  
+  $scope.edit = function(item) {
+    // TODO:
+    alert('Edit Item: ' + item.id);
+  };
+  $scope.share = function(item) {
+    // TODO:
+    alert('Share Item: ' + item.id);
+  };
+  
+  $scope.moveItem = function(item, fromIndex, toIndex) {
+    $scope.items.splice(fromIndex, 1);
+    $scope.items.splice(toIndex, 0, item);
+
+    // TODO: update server
+  };
+  
+  $scope.onItemDelete = function(item) {
+    $scope.items.splice($scope.items.indexOf(item), 1);
+
+    // TODO: update server
+  };
+
+  // demo data
+  $scope.items = [
+    { id: 0, raw: "copy me"},
+    { id: 1, raw: "this is a test item"},
+    { id: 2, raw: "duh"},
+    { id: 3, raw: "http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state"},
+    { id: 4, raw: "http://angular-ui.github.io/bootstrap/"},
+    { id: 5, raw: "https://openshift.feedhenry.com/"},
+    { id: 6, raw: "https://www.redhat.com/en/about/value-of-subscription"},
+    { id: 7, raw: "https://openapis.org/"}
+  ];
 })
 
 .controller("CopyPasteController", function($scope, $cordovaClipboard) {
     $scope.lastRawText = '';
 
-    $scope.copyText = function(value) {
+    $scope.copyItem = function(value) {
         $cordovaClipboard.copy(value).then(function() {
             console.log("Copied text");
         }, function() {
