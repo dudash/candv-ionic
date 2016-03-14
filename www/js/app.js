@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'candv' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires', e.g. 'controllers' is found in controllers.js
-angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'test.controllers'])
+angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'testcontrollers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -24,6 +24,17 @@ angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'test.controllers'
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+  // this is in testcontrollers.js
+  .state('app.fhtest', {
+      url: '/fhtest',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/fhtest.html',
+          controller: 'FHTest'
+        }
+      }
+    })
+
   .state('app', {
     url: '/app',
     abstract: true,
@@ -39,16 +50,6 @@ angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'test.controllers'
       }
     }
   })
-
-  .state('app.fhtest', {
-      url: '/fhtest',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/fhtest.html',
-          controller: 'FHTest'
-        }
-      }
-    })
 
   .state('app.board', {
       url: '/boards/:boardId',

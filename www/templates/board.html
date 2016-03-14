@@ -26,9 +26,10 @@
 
 	</ion-content>
 	    <!-- This is the floating add button using on ng-mfb open source module -->
-		<nav ng-if="!data.showReorder" mfb-menu position="bl" effect="zoomin" label="Add..."
-		     active-icon="ion-edit" resting-icon="ion-plus-round"
+		<nav ng-if="!data.showReorder" mfb-menu position="bl" effect="zoomin" label="Cancel"
+		     active-icon="ion-close" resting-icon="ion-plus-round"
 		     toggling-method="click">
-		  <button mfb-button icon="ion-clipboard" label="New From Clipboard">+</button>
+		  <button mfb-button mfb-button-close ng-click="pasteText('TODO')" icon="ion-clipboard" label="New From Clipboard">+</button>
+		  <button mfb-button mfb-button-close ng-click="popupPasteInput()" icon="ion-edit" label="New...">+</button>
 		</nav>
 </ion-view>

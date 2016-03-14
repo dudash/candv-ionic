@@ -1,4 +1,4 @@
-angular.module('test.controllers', [])
+angular.module('testcontrollers', [])
 
 .controller('FHTest', function($scope) {
   // add function to pass userInput to cloud via

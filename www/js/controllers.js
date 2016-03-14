@@ -96,6 +96,17 @@ angular.module('controllers', ['ng-mfb'])
 .controller('BoardCtrl', function($scope, $stateParams) {
 
   // TODO: get this board data from server
+  // demo data, TODO: remove this unless in OFFLINE_DEBUG 
+  $scope.items = [
+    { id: 0, raw: "copy me"},
+    { id: 1, raw: "this is a test item"},
+    { id: 2, raw: "duh"},
+    { id: 3, raw: "http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state"},
+    { id: 4, raw: "http://angular-ui.github.io/bootstrap/"},
+    { id: 5, raw: "https://openshift.feedhenry.com/"},
+    { id: 6, raw: "https://www.redhat.com/en/about/value-of-subscription"},
+    { id: 7, raw: "https://openapis.org/"}
+  ];
 
   $scope.data = {
     showDelete: false
@@ -123,22 +134,18 @@ angular.module('controllers', ['ng-mfb'])
     // TODO: update server
   };
 
-  // demo data
-  $scope.items = [
-    { id: 0, raw: "copy me"},
-    { id: 1, raw: "this is a test item"},
-    { id: 2, raw: "duh"},
-    { id: 3, raw: "http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state"},
-    { id: 4, raw: "http://angular-ui.github.io/bootstrap/"},
-    { id: 5, raw: "https://openshift.feedhenry.com/"},
-    { id: 6, raw: "https://www.redhat.com/en/about/value-of-subscription"},
-    { id: 7, raw: "https://openapis.org/"}
-  ];
+  // popup a modal input to add data to the clipboard
+  $scope.popupPasteInput = function(item) {
+    // TODO:
+    console.log("TODO popup");
+  };
+
 })
 
 .controller("CopyPasteController", function($scope, $cordovaClipboard) {
     $scope.lastRawText = '';
 
+    // copy argument value onto the clipboard
     $scope.copyItem = function(value) {
         $cordovaClipboard.copy(value).then(function() {
             console.log("Copied text");
@@ -147,6 +154,7 @@ angular.module('controllers', ['ng-mfb'])
         });
     }
 
+    // paste the clipboard into the scope lastRawText
     $scope.pasteText = function() {
         $cordovaClipboard
             .paste()
@@ -156,6 +164,7 @@ angular.module('controllers', ['ng-mfb'])
                     $scope.lastRawText = result;
                 } else {
                     // no result, clear results
+                    console.error("There was an error pasting");
                     $scope.lastRawText = '';
                 }
             }, function (e) {
