@@ -21,6 +21,14 @@ You can generate all the icon sizes for this app with the following commands
 ## Run in Labs via Browser (side by side)
 > ionic serve --lab
 
+## Run on Device
+If you are building for iOS, you’ll need an Apple Developer account, open XCode from platforms/ios/ and do your testing.
+> cd platforms/ios
+> open candv-ionic.xcodeproj/
+
+If building for Android plug it in, and run
+> ionic run android
+
 ## Debugging
 > ionic serve -c 
 
