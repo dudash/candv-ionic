@@ -1,0 +1,49 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Settings</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeSettings()">Cancel</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="card">
+      <div class="item item-text-wrap">
+        There are no settings available.  Below is an example of what they will look like when they are implemented.
+      </div>
+    </div>
+    <form ng-submit="applySettings()">
+      <ul class="list">
+        <li class="item item-toggle">
+           Flip my bit
+           <label class="toggle toggle-assertive">
+             <input type="checkbox">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+        <li class="item item-toggle">
+           Flop it too
+           <label class="toggle toggle-positive">
+             <input type="checkbox">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+      </ul>
+      <ion-list>
+        <ion-checkbox ng-model="filter.blue">Red</ion-checkbox>
+        <ion-checkbox ng-model="filter.yellow">Yellow</ion-checkbox>
+        <ion-checkbox ng-model="filter.pink">Pink</ion-checkbox>
+      </ion-list>
+      <ion-list>
+        <ion-radio ng-model="choice" ng-value="'A'">Choose Me</ion-radio>
+        <ion-radio ng-model="choice" ng-value="'B'">No! Choose Me</ion-radio>
+      </ion-list>
+      <label class="item">
+        <button class="button button-block button-positive" type="submit">Close</button>
+      </label>
+    </form>
+  </ion-content>
+</ion-modal-view>

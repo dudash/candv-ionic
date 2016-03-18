@@ -8,31 +8,45 @@ angular.module('controllers', ['ng-mfb'])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  // -------------------- Settings Stuff ------------------------
+  $ionicModal.fromTemplateUrl('templates/settings.html', {
+    scope: $scope
+  }).then(function(settingsModal) {
+    $scope.settingsModal = settingsModal;
+  });
+  $scope.showSettings = function() {
+    $scope.settingsModal.show();
+  };
+  $scope.closeSettings = function() {
+    $scope.settingsModal.hide();
+  };
+  $scope.applySettings = function() {
+    console.log('Saving Settings');
+    // TODO
+    $scope.closeSettings();
+  };
 
+  // -------------------- Login Stuff ------------------------
   // Flag to say if we are logged in or not
   $scope.isLoggedIn = false;
-
   // Form data for the login modal
   $scope.loginData = {};
-
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
+  }).then(function(loginModal) {
+    $scope.loginModal = loginModal;
   });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
+  $scope.showlogin = function() {
+    $scope.loginModal.show();
   };
-
-  // Open the login modal
+  $scope.closeLogin = function() {
+    $scope.loginModal.hide();
+  };
   $scope.logout = function() {
     // TODO: any checks for sync or popup a "are you sure" can go here
     $scope.doLogout();
   };
-
   // Perform the login action when the user submits the login form
   $scope.doLogout = function() {
     console.log('Doing logout', $scope.loginData);
@@ -40,20 +54,13 @@ angular.module('controllers', ['ng-mfb'])
     $ionicHistory.nextViewOptions({disableBack: true});
     $state.go('app.board', {board:0}, {location:'replace', reload:true});
   }
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    
     $scope.isLoggedIn = true;  // TODO: set this based on success/fail
+    $scope.closeLogin(); // TODO: close after success, show error otherwise
     $ionicHistory.nextViewOptions({disableBack: true});
     $state.go('app.boardslist');
-
     // TODO:
     // OAuth 2.0 Example
     // OAuth does not require any params, instead the "authCallback" param should be set on the $fh.auth call.
@@ -76,7 +83,6 @@ angular.module('controllers', ['ng-mfb'])
         alert("Authentication failed - " + err.message);
       }
     }
-
   };
 
 })
@@ -84,7 +90,6 @@ angular.module('controllers', ['ng-mfb'])
 .controller('BoardslistCtrl', function($scope) {
 
   // TODO: get boards we can access from server
-
   $scope.boardslist = [
     { title: 'Global', id: 0 },
     { title: 'Work', id: 2 },
@@ -93,7 +98,9 @@ angular.module('controllers', ['ng-mfb'])
   ];
 })
 
-.controller('BoardCtrl', function($scope, $stateParams) {
+.controller('BoardCtrl', function($scope, $stateParams, $cordovaClipboard) {
+
+  $scope.clipboardRaw = '';
 
   // TODO: get this board data from server
   // demo data, TODO: remove this unless in OFFLINE_DEBUG 
@@ -134,14 +141,37 @@ angular.module('controllers', ['ng-mfb'])
     // TODO: update server
   };
 
-  // popup a modal input to add data to the clipboard
-  $scope.popupPasteInput = function(item) {
+  // popup an input to add data to the clipboard
+  $scope.popupPasteInput = function() {
     // TODO:
     console.log("TODO popup");
+    alert('TODO popup for getting data');
   };
 
+  $scope.newFromClipboard = function() {
+    alert('TODO paste: ' + $scope.clipboardRaw);
+  };
+
+  $scope.getClipboard = function() {
+      $cordovaClipboard
+          .paste()
+          .then(function (result) {
+              if(result) {
+                  console.log("got text from clipboard: " + result);
+                  $scope.clipboardRaw = result;
+              } else {
+                  // no result, clear results
+                  console.error("There was an error pasting");
+                  $scope.clipboardRaw = '';
+              }
+          }, function (e) {
+              // error - do nothing cuz we don't care
+          });
+  };
 })
 
+
+/// This might need to be removed and merged
 .controller("CopyPasteController", function($scope, $cordovaClipboard) {
     $scope.lastRawText = '';
 

@@ -14,14 +14,17 @@ You can generate all the icon sizes for this app with the following commands
 ## Building
 > ionic build
 
-## Run in Emulator
+## Running
+Note that the cordova access to the clipboard doesn't work in the emulators...  So testing is going to be difficult without an physical device.
+
+### Run in Emulator
 > ionic emulate ios
 > ionic emulate android
 
-## Run in Labs via Browser (side by side)
+### Run in Labs via Browser (side by side)
 > ionic serve --lab
 
-## Run on Device
+### Run on Device
 If you are building for iOS, you’ll need an Apple Developer account, open XCode from platforms/ios/ and do your testing.
 > cd platforms/ios
 > open candv-ionic.xcodeproj/
