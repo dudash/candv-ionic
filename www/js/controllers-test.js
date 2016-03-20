@@ -1,8 +1,11 @@
 angular.module('testcontrollers', [])
 
+//-----------------------------------------------------------------------------
 .controller('FHTest', function($scope) {
+  
   // add function to pass userInput to cloud via
   // $fh.cloud call to controller scope
+
   $scope.sayHello = function(userInput) {
     // TODO: not sure why $scope.userInput isn't working for this model and controller?  Subscope issues?
 
@@ -42,4 +45,5 @@ angular.module('testcontrollers', [])
       });
     }
   };
+
 });

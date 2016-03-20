@@ -1,5 +1,6 @@
 angular.module('controllers', ['ng-mfb'])
 
+//-----------------------------------------------------------------------------
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $state, $ionicHistory) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -87,6 +88,8 @@ angular.module('controllers', ['ng-mfb'])
 
 })
 
+
+//-----------------------------------------------------------------------------
 .controller('BoardslistCtrl', function($scope) {
 
   // TODO: get boards we can access from server
@@ -96,8 +99,25 @@ angular.module('controllers', ['ng-mfb'])
     { title: 'Home', id: 3 },
     { title: 'Shared by John', id: 4 },
   ];
+
+  $scope.doRefresh = function() {
+    // TODO
+    // $http.get('/new-items')
+    //  .success(function(newItems) {
+    //    $scope.items = newItems;
+    //  })
+    //  .finally(function() {
+    //    // Stop the ion-refresher from spinning
+    //    $scope.$broadcast('scroll.refreshComplete');
+    //  });
+
+    // for now just close the refresh
+    $scope.$broadcast('scroll.refreshComplete');
+  };
 })
 
+
+//-----------------------------------------------------------------------------
 .controller('BoardCtrl', function($scope, $stateParams, $cordovaClipboard) {
 
   $scope.clipboardRaw = '';
@@ -114,15 +134,30 @@ angular.module('controllers', ['ng-mfb'])
     { id: 6, raw: "https://www.redhat.com/en/about/value-of-subscription"},
     { id: 7, raw: "https://openapis.org/"}
   ];
-
   $scope.data = {
     showDelete: false
   };
-  
+
+  $scope.doRefresh = function() {
+    // TODO
+    // $http.get('/new-items')
+    //  .success(function(newItems) {
+    //    $scope.items = newItems;
+    //  })
+    //  .finally(function() {
+    //    // Stop the ion-refresher from spinning
+    //    $scope.$broadcast('scroll.refreshComplete');
+    //  });
+
+    // for now just close the refresh
+    $scope.$broadcast('scroll.refreshComplete');
+  };
+
   $scope.edit = function(item) {
     // TODO:
     alert('Edit Item: ' + item.id);
   };
+
   $scope.share = function(item) {
     // TODO:
     alert('Share Item: ' + item.id);
@@ -171,6 +206,7 @@ angular.module('controllers', ['ng-mfb'])
 })
 
 
+//-----------------------------------------------------------------------------
 /// This might need to be removed and merged
 .controller("CopyPasteController", function($scope, $cordovaClipboard) {
     $scope.lastRawText = '';
