@@ -4,7 +4,9 @@ A copy and paste mobile application with a cloud backend. Pronounced as 'kand-ve
 
 Initial concept sketches:
 ![Screenshot CandV](./.design/initial_ui_sketch.JPG?raw=true)
-![Screenshot CandV](./.screens/2016-02-27_2.png?raw=true)
+
+<img align="left" src="./.screens/2016-03-21_1.png" width="200px"/> 
+<img align="right" src="./.screens/2016-03-21_2.png" width="200px"/> 
 
 -------
 
@@ -34,4 +36,3 @@ Under the terms of the [MIT][1].
 [2]: https://github.com/dudash/candv/
 [3]: https://ionicframework.com
 [4]: http://www.feedhenry.com/
-
