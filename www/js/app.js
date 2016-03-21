@@ -3,8 +3,14 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'candv' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires', e.g. 'controllers' is found in controllers.js
-angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'testcontrollers'])
-
+angular.module('candv', ['ionic', 'ngCordova',
+  'app.controller',
+  'board.controllers',
+  'board.services',
+  'search.controller',
+  'test.controllers']
+)
+//-----------------------------------------------------------------------------
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,7 +26,7 @@ angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'testcontrollers']
     }
   });
 })
-
+//-----------------------------------------------------------------------------
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -33,7 +39,7 @@ angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'testcontrollers']
           controller: 'FHTest'
         }
       }
-    })
+  })
 
   .state('app', {
     url: '/app',
@@ -46,9 +52,20 @@ angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'testcontrollers']
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/search.html',
+        controller: 'SearchCtrl'
       }
     }
+  })
+
+  .state('app.boardslist', {
+      url: '/boardslist',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/boardslist.html',
+          controller: 'BoardslistCtrl'
+        }
+      }
   })
 
   .state('app.board', {
@@ -59,17 +76,7 @@ angular.module('candv', ['ionic', 'ngCordova', 'controllers', 'testcontrollers']
           controller: 'BoardCtrl'
         }
       }
-    })
-
-  .state('app.boardslist', {
-      url: '/boardslist',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/boardslist.html',
-          controller: 'BoardslistCtrl'
-        }
-      }
-    });
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/boards/0');

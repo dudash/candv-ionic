@@ -1,4 +1,4 @@
-angular.module('testcontrollers', [])
+angular.module('test.controllers', [])
 
 //-----------------------------------------------------------------------------
 .controller('FHTest', function($scope) {
