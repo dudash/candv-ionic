@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires', e.g. 'controllers' is found in controllers.js
 angular.module('candv', ['ionic', 'ngCordova',
   'app.controller',
+  'app.services',
   'board.controllers',
   'board.services',
   'search.controller',
@@ -35,7 +36,7 @@ angular.module('candv', ['ionic', 'ngCordova',
       url: '/fhtest',
       views: {
         'menuContent': {
-          templateUrl: 'templates/fhtest.html',
+          templateUrl: 'templates/test-fh.html',
           controller: 'FHTest'
         }
       }

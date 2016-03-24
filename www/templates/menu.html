@@ -23,9 +23,9 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/fhtest"><div class="ion-erlenmeyer-flask-bubbles"> Feed Henry Test</div></ion-item>
-        <ion-item menu-close href="#/app/boards/0"><div class="ion-clipboard"> Global Board</div></ion-item>
         <ion-item menu-close href="#/app/search"><div class="ion-ios-search-strong"> Search</div></ion-item>
+        <ion-item menu-close href="#/app/fhtest"><div class="ion-erlenmeyer-flask-bubbles"> Feed Henry Test</div></ion-item>
+        <ion-item menu-close href="#/app/boards/0"><div class="ion-android-globe"> Global Board</div></ion-item>
         <ion-item menu-close ng-hide="!isLoggedIn" href="#/app/boardslist"><div class="ion-clipboard"> Your Boards</div></ion-item>
         <ion-item menu-close ng-if="!isLoggedIn" ng-click="showlogin()"><div class="ion-log-in"> Login</div></ion-item>
         <ion-item menu-close ng-if="isLoggedIn" ng-click="logout()"><div class="ion-log-out"> Logout</div></ion-item>

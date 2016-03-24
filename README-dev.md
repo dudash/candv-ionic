@@ -4,10 +4,9 @@ Some tips for developers
 ## WARNING!
 Make sure that you NEVER commit any private keys into the github repo.  The following file(s) should be cleaned before commit:
 * /www/fhconfig.js
-* 
 
 ## Generating/Regenerating Assets
-You can generate all the icon sizes for this app with the following commands
+You can generate (or regenerate) all the icon sizes for this app with the following commands
 > ionic resources --splash
 > ionic resources --icon
 
@@ -15,7 +14,6 @@ You can generate all the icon sizes for this app with the following commands
 > ionic build
 
 ## Running
-Note that the cordova access to the clipboard doesn't work in the emulators...  So testing is going to be difficult without an physical device.
 
 ### Run in Emulator
 > ionic emulate ios
@@ -33,6 +31,8 @@ If building for Android plug it in, and run
 > ionic run android
 
 ## Debugging
+(Note that the cordova access to the clipboard doesn't work in the web emulator)
+
 > ionic serve -c 
 
 ## Design/Architecture Diagrams

@@ -1,6 +1,12 @@
-angular.module('app.controller', [])
+angular.module('app.controller', ['app.services'])
 //-----------------------------------------------------------------------------
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state, $ionicHistory) {
+.controller('AppCtrl', function($scope, 
+  $ionicModal, 
+  $timeout, 
+  $state, 
+  $ionicHistory, 
+  LoginHelper,
+  SettingsHelper) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -28,7 +34,7 @@ angular.module('app.controller', [])
 
   // Login Stuff ------------------------
   // Flag to say if we are logged in or not
-  $scope.isLoggedIn = false;
+  $scope.isLoggedIn = LoginHelper.isLoggedIn;
   // Form data for the login modal
   $scope.loginData = {};
   // Create the login modal that we will use later
@@ -50,14 +56,20 @@ angular.module('app.controller', [])
   // Perform the login action when the user submits the login form
   $scope.doLogout = function() {
     console.log('Doing logout', $scope.loginData);
-    $scope.isLoggedIn = false;  // TODO: set this based on success/fail
+    
+    LoginHelper.isLoggedIn = false; // TODO: set this based on success/fail
+    $scope.isLoggedIn = LoginHelper.isLoggedIn;  
+
     $ionicHistory.nextViewOptions({disableBack: true});
     $state.go('app.board', {board:0}, {location:'replace', reload:true});
   }
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    $scope.isLoggedIn = true;  // TODO: set this based on success/fail
+    
+    LoginHelper.isLoggedIn = true;
+    $scope.isLoggedIn = LoginHelper.isLoggedIn;  // TODO: set this based on success/fail
+
     $scope.closeLogin(); // TODO: close after success, show error otherwise
     $ionicHistory.nextViewOptions({disableBack: true});
     $state.go('app.boardslist');
