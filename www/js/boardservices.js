@@ -1,51 +1,75 @@
+// Author: @dudash | jdudash@redhat.com
+// License: https://opensource.org/licenses/MIT
+
+// This module utilizes the a REST API for syncing clipboard items
+//
+// Note: You can swap this out and use the FH Sync API - find out how in the README-dev.md 
 angular.module('board.services', [])
 
 //-----------------------------------------------------------------------------
-.factory('BoardsList', function() {
-  var  dummyboardslist = [
-    { title: 'Global', id: 0 },
-    { title: 'Work', id: 2 },
-    { title: 'Home', id: 3 },
-    { title: 'Shared by John', id: 4 },
-  ];
-
+.factory('BoardsList', function($http) {
+  var boards = [];
+  
   return {
-    dummyboards: dummyboardslist,
-    getBoard: function(index) {
-      return $http.get("https://www.yoursite.com/boards").then(function(response) {
-        boardslist = response;
-        return boardslist;
-      });
+    getBoards: function(apiUrl) {
+      const URL = apiUrl + '/boards';
+      console.log('GET boards from ' + URL);
+      return $http.get(URL)
+        .success(function(data, status, headers, config){
+          console.log("**** SUCCESS ****");
+          console.log(status);
+        })
+        .error(function(data, status, headers, config){
+          console.log("**** ERROR ****");
+          console.log(JSON.stringify(config));
+          console.log(status);
+          // TODO: inform user of an error ("Couldn't get list from server")
+          return null;
+        })
+        .then(function(response) {
+          console.log('response = ' + JSON.stringify(response));
+          boards = response.data;
+          return boards;
+        });  // return a promise of the list
     },
-    addBoard: function() {
-      $http.post("https://www.yoursite.com/boards");
+
+    addBoard: function(apiUrl, boardData) {
+      // TODO: pass data
+      $http.post('/boards');
     }
   }
 })
 
 //-----------------------------------------------------------------------------
-.factory('BoardItems', function() {
-    var dummyitems = [
-      { id: 0, raw: "copy me"},
-      { id: 1, raw: "this is a test item"},
-      { id: 2, raw: "duh 2.0"},
-      { id: 3, raw: "http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state"},
-      { id: 4, raw: "http://angular-ui.github.io/bootstrap/"},
-      { id: 5, raw: "https://openshift.feedhenry.com/"},
-      { id: 6, raw: "https://www.redhat.com/en/about/value-of-subscription"},
-      { id: 7, raw: "https://openapis.org/"}
-    ];
-
+.factory('BoardItems', function($http) {
+    var items = [];
+    
     return {
-    dummyitems: dummyitems,
-    getItem: function(index) {
-      return $http.get("https://www.yoursite.com/board/0/items").then(function(response) {
-        items = response;
-        return items;
-      });
-    },
-    addItem: function() {
-      $http.post("https://www.yoursite.com/item");
+      getItems: function(apiUrl) {
+        const URL = apiUrl + '/boards/0/items';
+        console.log('GET items from ' + URL);
+        return $http.get(URL)
+          .success(function(data, status, headers, config){
+            console.log("**** SUCCESS ****");
+            console.log(status);
+          })
+          .error(function(data, status, headers, config){
+            console.log("**** ERROR ****");
+            console.log(JSON.stringify(config));
+            console.log(status);
+            // TODO: inform user of an error ("Couldn't get list from server")
+            return null;
+          })
+          .then(function(response) {
+            console.log('response = ' + JSON.stringify(response));
+            items = response.data;
+            return items;
+          });  // return a promise of the list
+      },
+
+      addItem: function(apiUrl, itemData) {
+        // TODO: pass data
+        $http.post('/boards/0/items');
+      }
     }
-  }
 });

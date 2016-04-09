@@ -1,3 +1,6 @@
+// Author: @dudash | jdudash@redhat.com
+// License: https://opensource.org/licenses/MIT
+
 angular.module('app.controller', ['app.services'])
 //-----------------------------------------------------------------------------
 .controller('AppCtrl', function($scope, 
@@ -15,6 +18,7 @@ angular.module('app.controller', ['app.services'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   // Settings Stuff ------------------------
+  $scope.REMOTE_SERVER_API_URL = "http://localhost:8080/api/v0";
   $ionicModal.fromTemplateUrl('templates/settings.html', {
     scope: $scope
   }).then(function(settingsModal) {
@@ -28,7 +32,8 @@ angular.module('app.controller', ['app.services'])
   };
   $scope.applySettings = function() {
     console.log('Saving Settings');
-    // TODO
+    // TODO set the variables in the global scope
+    // TODO save the variables into storage
     $scope.closeSettings();
   };
 

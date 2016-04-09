@@ -4,11 +4,12 @@
   <description>
     A copy and paste mobile application (which talks to a cloud backend). Pronounced as 'kand-ve.
   </description>
-  <author email="jason.dudash@gmail.com" href="https://github.com/dudash">
+  <author email="jdudash@redhat.com" href="https://github.com/dudash">
     Jason Dudash
   </author>
   <content src="index.html"/>
-  <access origin="*"/>
+  <access origin="*" subdomains="true"/>
+  <allow-navigation href="*" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
