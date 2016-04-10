@@ -1,7 +1,7 @@
 <ion-view view-title="Board {{board.title}}">
     <ion-nav-buttons side="right">
-        <button class="button" ng-if="!data.showDelete" ng-click="data.showDelete = !data.showDelete; data.showReorder = !data.showReorder">Edit</button>
-        <button class="button" ng-if="data.showDelete" ng-click="data.showDelete = !data.showDelete; data.showReorder = !data.showReorder">Done</button>
+        <button class="button" ng-if="!viewShowDelete" ng-click="toggleEdit()">Edit</button>
+        <button class="button" ng-if="viewShowDelete" ng-click="toggleEdit()">Done</button>
     </ion-nav-buttons>
 
     <ion-content>
@@ -9,14 +9,16 @@
           pulling-text="Pull to refresh"
           on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+        <ion-list show-delete="viewShowDelete" show-reorder="false" show-edit="false">
             <ion-item ng-repeat="item in items" item="item" on-tap="putOnClipboard('{{ item.raw }}')">
               {{ item.raw }}
               <ion-delete-button class="ion-minus-circled" ng-click="deleteItem(item)">
               </ion-delete-button>
+              <!--
               <ion-option-button class="button-assertive" ng-click="editItem(item)">
                 Edit
               </ion-option-button>
+              -->
               <ion-option-button class="button-calm" ng-click="shareItem(item)">
                 Share
               </ion-option-button>
@@ -27,7 +29,7 @@
     </ion-content>
 
         <!-- This is the floating add button using on ng-mfb open source module -->
-        <nav ng-if="!data.showReorder" mfb-menu position="bl" effect="zoomin" label="Cancel"
+        <nav ng-if="!viewShowDelete" mfb-menu position="bl" effect="zoomin" label="Cancel"
              active-icon="ion-close" resting-icon="ion-plus-round"
              toggling-method="click">
           <button mfb-button mfb-button-close ng-click="newFromClipboard()" icon="ion-clipboard" label="New From Clipboard">+</button>

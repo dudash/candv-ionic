@@ -28,7 +28,7 @@ angular.module('board.services', [])
           console.log('response = ' + JSON.stringify(response));
           boards = response.data;
           return boards;
-      });  // return a promise of the list
+        });  // return a promise of the list
     },
 
     addBoard: function(apiUrl, boardData) {
@@ -47,7 +47,7 @@ angular.module('board.services', [])
           .then(function(response) {
             console.log('POST success, response = ' + JSON.stringify(response));
             return response;
-        });  // return a promise of the post
+          });  // return a promise of the post
     }
   }
 })
@@ -74,7 +74,7 @@ angular.module('board.services', [])
             console.log('response = ' + JSON.stringify(response));
             items = response.data;
             return items;
-        });  // return a promise of the list
+          });  // return a promise of the list
       },
 
       addItem: function(apiUrl, itemData) {
@@ -93,7 +93,26 @@ angular.module('board.services', [])
           .then(function(response) {
             console.log('POST success, response = ' + JSON.stringify(response));
             return response;
-        });  // return a promise of the post
+          });  // return a promise of the post
+      },
+
+      deleteItem: function(apiUrl, itemData) {
+          const URL = apiUrl + '/boards/0/items/' + itemData._id;
+          console.log('DELETE item to ' + URL);
+          return $http.delete(URL)
+            .success(function(data, status, headers, config){
+              console.log("**** SUCCESS ****");
+              console.log(status);
+            })
+            .error(function(data, status, headers, config){
+              console.log("**** ERROR ****");
+              console.log(JSON.stringify(config));
+              console.log(status);
+            })
+            .then(function(response) {
+              console.log('DELETE success, response = ' + JSON.stringify(response));
+              return response;
+          });  // return a promise of the post
       }
     }
 });

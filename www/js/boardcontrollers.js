@@ -31,9 +31,9 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
 
 //-----------------------------------------------------------------------------
 .controller('BoardCtrl', function($scope, $stateParams, $cordovaClipboard, BoardItems) {
-
   $scope.clipboardRaw = '';
   $scope.items = [];
+  $scope.viewShowDelete = false;
   BoardItems.getItems($scope.REMOTE_SERVER_API_URL)
     .then(function(data) {
       $scope.items = data;
@@ -53,16 +53,21 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
     });
   };
 
+  // --- Show/hide the edit menu ---
+  $scope.toggleEdit = function() { 
+    $scope.viewShowDelete = !$scope.viewShowDelete;
+  };
+  
   // --- Edit an Item ---
   $scope.editItem = function(item) {
     // TODO:
-    alert('Edit Item: ' + item.id);
+    alert('Error: edit unavailable - sorry.');
   };
 
   // --- Share an Item ---
   $scope.shareItem = function(item) {
     // TODO:
-    alert('Share Item: ' + item.id);
+    alert('Error: share unavailable - sorry.');
   };
   
   // --- Move an Item in the List ---
@@ -70,18 +75,18 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
     $scope.items.splice(fromIndex, 1);
     $scope.items.splice(toIndex, 0, item);
 
-    // TODO: update server list order
+    // FUTURE: update server list order
 
   };
 
   // --- Delete an Item  ---
   $scope.deleteItem = function(item) {
-    // BoardItems.deleteItem($scope.REMOTE_SERVER_API_URL, item)
-    //   .then(function(data) {
-    //     $scope.items.splice($scope.items.indexOf(item), 1);  // clear it from the local list
-    //   }).catch(function() {
-    //     alert('error deleting data from the server');
-    // });
+    BoardItems.deleteItem($scope.REMOTE_SERVER_API_URL, item)
+      .then(function(status) {
+        $scope.items.splice($scope.items.indexOf(item), 1);  // clear it from the local list
+      }).catch(function() {
+        alert('error deleting data from the server');
+    });
   };
 
   // --- Popup to get Paste Text ---
@@ -102,9 +107,6 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
       if(result) {
         console.log("got text from clipboard: " + result);
         $scope.clipboardRaw = result;
-
-        alert('new item with: ' + result);  // TODO: remove this
-
         var item = {"raw": result};
         BoardItems.addItem($scope.REMOTE_SERVER_API_URL, item)
           .then(function(data) {
