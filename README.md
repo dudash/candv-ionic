@@ -4,8 +4,7 @@ A copy and paste mobile application with a cloud backend. Pronounced as 'kand-ve
 
 Initial concept sketches:
 ![Screenshot CandV](./.design/initial_ui_sketch.JPG?raw=true)
-<img src="./.screens/2016-03-21_2.png" width="200px"/> 
-<img src="./.screens/2016-03-21_1.png" width="200px"/> 
+![Screenshot CandV](./.screens/2016-04-10_1.png)
 
 -------
 
@@ -25,8 +24,6 @@ To run your own, get the source for the server [here][2] along with instructions
 TBD Conceptual Arch - mobile app, paste bin analysis service, web app (client side + server side), database
 TBD Deployment Arch - Feed Henry, OpenShift
 
-### Notes on scaling
-TBD - supporting thousands of users
 
 ## License
 Under the terms of the [MIT][1].
