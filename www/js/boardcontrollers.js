@@ -70,46 +70,57 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
     $scope.items.splice(fromIndex, 1);
     $scope.items.splice(toIndex, 0, item);
 
-    // TODO: update server
+    // TODO: update server list order
+
   };
 
   // --- Delete an Item  ---
   $scope.deleteItem = function(item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
-
-    // TODO: update server
+    // BoardItems.deleteItem($scope.REMOTE_SERVER_API_URL, item)
+    //   .then(function(data) {
+    //     $scope.items.splice($scope.items.indexOf(item), 1);  // clear it from the local list
+    //   }).catch(function() {
+    //     alert('error deleting data from the server');
+    // });
   };
 
   // --- Popup to get Paste Text ---
   $scope.popupPasteInput = function() {
-    // TODO:
-    alert('TODO open keyboard and model to add data');
+    // TODO: get data from keyboard input popup
+    var item = {"raw": "TEST TESTING"};
+    BoardItems.addItem($scope.REMOTE_SERVER_API_URL, item)
+      .then(function(data) {
+        $scope.items.unshift(item);
+      }).catch(function() {
+        alert('error adding data to the server');
+    });
   };
 
   // --- Create and Item from Clipboard ---
   $scope.newFromClipboard = function() {
-    $cordovaClipboard
-      .paste().then(function (result) {
-        if(result) {
-          console.log("got text from clipboard: " + result);
-          $scope.clipboardRaw = result;
+    $cordovaClipboard.paste().then(function (result) {
+      if(result) {
+        console.log("got text from clipboard: " + result);
+        $scope.clipboardRaw = result;
 
-          alert('new item with: ' + $scope.clipboardRaw);  // TODO: remove this
-          // TODO: show a little indicator that the copy was successful (pop up for a second or so and then fade away)
+        alert('new item with: ' + result);  // TODO: remove this
 
-          // TODO: insert item to list on server and refresh
-
-        } else {
-          // no result, clear results
-          console.error("Clipboard empty");
-          $scope.clipboardRaw = '';
-          alert('Sorry, the clipboard is empty - no paste for you.');
-        }
-      }, function (e) {
-        // error
-        console.error("There was an error pasting");
+        var item = {"raw": result};
+        BoardItems.addItem($scope.REMOTE_SERVER_API_URL, item)
+          .then(function(data) {
+            $scope.items.unshift(item);
+          }).catch(function() {
+            alert('error adding data to the server');
+        });
+      } else {
+        console.error("Clipboard empty");
         $scope.clipboardRaw = '';
         alert('Sorry, the clipboard is empty - no paste for you.');
+      }
+    }, function (e) {
+      console.error("There was an error pasting");
+      $scope.clipboardRaw = '';
+      alert('Sorry, the clipboard is empty - no paste for you.');
     });
   };
 
@@ -118,6 +129,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
     $cordovaClipboard.copy(value).then(function() {
         console.log("copied text");
         alert('put on clipboard: ' + value);
+        // TODO: show a little indicator that the copy was successful (pop up for a second or so and then fade away)
     }, function() {
         console.error("There was an error copying text to the clipboard.");
     });

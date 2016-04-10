@@ -23,19 +23,31 @@ angular.module('board.services', [])
           console.log("**** ERROR ****");
           console.log(JSON.stringify(config));
           console.log(status);
-          // TODO: inform user of an error ("Couldn't get list from server")
-          return null;
         })
         .then(function(response) {
           console.log('response = ' + JSON.stringify(response));
           boards = response.data;
           return boards;
-        });  // return a promise of the list
+      });  // return a promise of the list
     },
 
     addBoard: function(apiUrl, boardData) {
-      // TODO: pass data
-      $http.post('/boards');
+        const URL = apiUrl + '/boards';
+        console.log('POST board to ' + URL);
+        return $http.post(URL, boardData)
+          .success(function(data, status, headers, config){
+            console.log("**** SUCCESS ****");
+            console.log(status);
+          })
+          .error(function(data, status, headers, config){
+            console.log("**** ERROR ****");
+            console.log(JSON.stringify(config));
+            console.log(status);
+          })
+          .then(function(response) {
+            console.log('POST success, response = ' + JSON.stringify(response));
+            return response;
+        });  // return a promise of the post
     }
   }
 })
@@ -57,19 +69,31 @@ angular.module('board.services', [])
             console.log("**** ERROR ****");
             console.log(JSON.stringify(config));
             console.log(status);
-            // TODO: inform user of an error ("Couldn't get list from server")
-            return null;
           })
           .then(function(response) {
             console.log('response = ' + JSON.stringify(response));
             items = response.data;
             return items;
-          });  // return a promise of the list
+        });  // return a promise of the list
       },
 
       addItem: function(apiUrl, itemData) {
-        // TODO: pass data
-        $http.post('/boards/0/items');
+        const URL = apiUrl + '/boards/0/items';
+        console.log('POST item to ' + URL);
+        return $http.post(URL, itemData)
+          .success(function(data, status, headers, config){
+            console.log("**** SUCCESS ****");
+            console.log(status);
+          })
+          .error(function(data, status, headers, config){
+            console.log("**** ERROR ****");
+            console.log(JSON.stringify(config));
+            console.log(status);
+          })
+          .then(function(response) {
+            console.log('POST success, response = ' + JSON.stringify(response));
+            return response;
+        });  // return a promise of the post
       }
     }
 });
