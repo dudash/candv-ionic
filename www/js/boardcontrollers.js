@@ -30,7 +30,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
 
 
 //-----------------------------------------------------------------------------
-.controller('BoardCtrl', function($scope, $stateParams, $cordovaClipboard, BoardItems) {
+.controller('BoardCtrl', function($scope, $ionicPopup, $stateParams, $cordovaClipboard, BoardItems) {
   $scope.clipboardRaw = '';
   $scope.items = [];
   $scope.viewShowDelete = false;
@@ -60,13 +60,11 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
   
   // --- Edit an Item ---
   $scope.editItem = function(item) {
-    // TODO:
     alert('Error: edit unavailable - sorry.');
   };
 
   // --- Share an Item ---
   $scope.shareItem = function(item) {
-    // TODO:
     alert('Error: share unavailable - sorry.');
   };
   
@@ -74,9 +72,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
   $scope.moveItem = function(item, fromIndex, toIndex) {
     $scope.items.splice(fromIndex, 1);
     $scope.items.splice(toIndex, 0, item);
-
     // FUTURE: update server list order
-
   };
 
   // --- Delete an Item  ---
@@ -91,13 +87,31 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
 
   // --- Popup to get Paste Text ---
   $scope.popupPasteInput = function() {
-    // TODO: get data from keyboard input popup
-    var item = {"raw": "TEST TESTING"};
-    BoardItems.addItem($scope.REMOTE_SERVER_API_URL, item)
-      .then(function(data) {
-        $scope.items.unshift(item);
-      }).catch(function() {
-        alert('error adding data to the server');
+    $scope.popupData = {};
+    var inputPopup = $ionicPopup.show({
+      template: '<input type="text" ng-model="popupData.rawtext">',
+      title: 'Enter Text',
+      subTitle: 'Please input the text to add below:',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        { text: '<b>Save</b>', type: 'button-positive',
+          onTap: function(e) { 
+            if (!$scope.popupData.rawtext) { e.preventDefault();}
+            else {return $scope.popupData.rawtext;}
+          }
+        }
+      ]
+    });
+    inputPopup.then(function(res) {
+      if (res == null) return;
+      var item = {"raw": $scope.popupData.rawtext};
+      BoardItems.addItem($scope.REMOTE_SERVER_API_URL, item)
+        .then(function(data) {
+          $scope.items.unshift(item);
+        }).catch(function() {
+          alert('error adding data to the server');
+      });
     });
   };
 
