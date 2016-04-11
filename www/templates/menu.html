@@ -13,23 +13,22 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
+    <ion-header-bar class="bar-assertive">
+      <button ng-if="!isLoggedIn" class="button button-icon ion-ios-personadd-outline" ng-click="addUser()"/>
+      <button ng-if="isLoggedIn" class="button button-icon ion-ios-person" ng-click="editUser()"/>
+      </button>
+      <h1 class="title">CandV</h1>
+      <button class="button button-icon ion-gear-b" ng-click="showSettings()"/>
+      </button>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
-        </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
-        </ion-item>
+        <ion-item menu-close href="#/app/search"><div class="ion-ios-search-strong"> Search</div></ion-item>
+        <ion-item menu-close href="#/app/fhtest"><div class="ion-erlenmeyer-flask-bubbles"> Feed Henry Test</div></ion-item>
+        <ion-item menu-close href="#/app/boards/0"><div class="ion-android-globe"> Global Board</div></ion-item>
+        <ion-item menu-close ng-hide="!isLoggedIn" href="#/app/boardslist"><div class="ion-clipboard"> Your Boards</div></ion-item>
+        <ion-item menu-close ng-if="!isLoggedIn" ng-click="showlogin()"><div class="ion-log-in"> Login</div></ion-item>
+        <ion-item menu-close ng-if="isLoggedIn" ng-click="logout()"><div class="ion-log-out"> Logout</div></ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
