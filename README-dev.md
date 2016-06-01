@@ -8,13 +8,16 @@ Make sure that you NEVER commit any private keys into the github repo.  The foll
 ## About the Source Code
 Here are some tips about working with this source code
 
-### Using FH Sync API vs the CandV REST API
+### Using FH APIs vs the CandV REST API
 You can swap out the default use of the CandV REST API and utilize Feed Henry Sync API. 
 This takes advantage of the features in the Red Hat Mobile Application Platform (MAP)
 and eliminates the need to run a CandV server.  It also give the app an added benefit 
-of [online/offline sync][2] support which doesn't exist when using the CandV REST API.
+of [online/offline sync][2] support and use of the platform authentication for login
+which don't exist when using the CandV REST API.
 
 The steps are as follows:
+ * Edit index.html
+ * set the REMOTE_SERVER_API_URL
  * TBD - still working on the code for this feature
 
 ## Generating/Regenerating Assets
