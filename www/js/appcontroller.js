@@ -18,7 +18,10 @@ angular.module('app.controller', ['app.services'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   // Settings Stuff ------------------------
-  $scope.REMOTE_SERVER_API_URL = "http://localhost:8080/api/v0";
+  $scope.API_VERSION = "v0";
+  $scope.CLOUD_URL = $fh.getCloudURL();
+  $scope.REMOTE_SERVER_API_URL = $scope.CLOUD_URL + "/api/" + $scope.API_VERSION;
+  //$scope.REMOTE_SERVER_API_URL = "http://localhost:8080/api/"+$scope.API_VERSION;
   $ionicModal.fromTemplateUrl('templates/settings.html', {
     scope: $scope
   }).then(function(settingsModal) {

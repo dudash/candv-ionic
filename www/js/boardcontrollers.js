@@ -11,18 +11,18 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
     .then(function(data) {
       $scope.boards = data;
     }).catch(function() {
-      alert('error getting data from the server');
+      alert('getBoards - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
   });
 
   // --- Get data to refresh view ---
   $scope.doRefresh = function() {
-    // TODO pull from server using service
+    // pull from server using service
     BoardsList.getBoards($scope.REMOTE_SERVER_API_URL)
       .then(function(data) {
         $scope.boards = data;
         $scope.$broadcast('scroll.refreshComplete');
       }).catch(function() {
-        alert('error getting data from the server');
+        alert('getBoards - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
@@ -38,7 +38,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
     .then(function(data) {
       $scope.items = data;
     }).catch(function() {
-      alert('error getting data from the server');
+      alert('getItems - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
   });
 
   // --- Get data to refresh view ---
@@ -48,7 +48,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
         $scope.items = data;
         $scope.$broadcast('scroll.refreshComplete');
       }).catch(function() {
-        alert('error getting data from the server');
+        alert('getItems - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
@@ -81,7 +81,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
       .then(function(status) {
         $scope.items.splice($scope.items.indexOf(item), 1);  // clear it from the local list
       }).catch(function() {
-        alert('error deleting data from the server');
+        alert('deleteItem - error deleting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
     });
   };
 
@@ -110,7 +110,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
         .then(function(data) {
           $scope.items.unshift(item);
         }).catch(function() {
-          alert('error adding data to the server');
+          alert('addItem - error adding data from the server: '+ $scope.REMOTE_SERVER_API_URL);
       });
     });
   };
@@ -126,7 +126,7 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
           .then(function(data) {
             $scope.items.unshift(item);
           }).catch(function() {
-            alert('error adding data to the server');
+            alert('addItem - error adding data from the server: ' + $scope.REMOTE_SERVER_API_URL);
         });
       } else {
         console.error("Clipboard empty");

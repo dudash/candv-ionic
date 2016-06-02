@@ -16,8 +16,8 @@ of [online/offline sync][2] support and use of the platform authentication for l
 which don't exist when using the CandV REST API.
 
 The steps are as follows:
- * Edit index.html
- * set the REMOTE_SERVER_API_URL
+ * Edit index.html (to use -fh javascript files)
+ * set the REMOTE_SERVER_API_URL as needed
  * TBD - still working on the code for this feature
 
 ## Generating/Regenerating Assets
