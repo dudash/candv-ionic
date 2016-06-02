@@ -1,0 +1,18 @@
+<ion-view view-title="Browse">
+    <ion-content ng-controller="FHTest">
+        <div class="row">
+            <div id="main" class="col col-offset-10 col-80" >
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                        <input type="text" id="uInput" placeholder="Enter Your Name Here" ng-model="userInput">
+                    </label>
+
+                </div>
+                <button class="button button-block button-positive" ng-disabled="!userInput" ng-click="sayHello()">Say Hello From The Cloud</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-offset-10 col-80"><h3 id="greeting"> <i class="icon {{textClassName}}"></i>  {{noticeMessage}}</h3></div>
+        </div>
+    </ion-content>
+</ion-view>
