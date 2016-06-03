@@ -1,9 +1,9 @@
 {
   "WARNING": "DO NOT CHECK THIS FILE INTO GITHUB WITH PRIVATE KEYS",
   "INFO": "Replace the <XXX> with your mobile application platform values and remove these top two items",
-  "host": "<RHMAP Core host>",
-  "projectid": "<Project ID>",
-  "connectiontag": "<Connection tag>",
-  "appid": "<Client App ID>",
-  "appkey": "<Client App API key>"
+  "appid": "mwggltcp4nhj3fyifcxuwgek",
+  "appkey": "f1fd98b177f8cda5b0b0db918a2ca94329ad229a",
+  "connectiontag": "0.0.16",
+  "host": "https://jdudash.us.demos.redhatmobile.com",
+  "projectid": "mwggltakejxwqhavqpuhyha3"
 }
