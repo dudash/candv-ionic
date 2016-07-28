@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/dudash/candv-ionic.png?label=ready&title=Ready)](https://waffle.io/dudash/candv-ionic)
 # CandV ('kand-ve) Mobile
 ## What is this?
 A copy and paste mobile application with a cloud backend. Pronounced as 'kand-ve.
