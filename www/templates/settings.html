@@ -1,17 +1,38 @@
+<!-- Dev Note: the factory functions for this template are in the appcontroller.js -->
 <ion-modal-view>
-  <ion-header-bar>
+  <ion-header-bar class="bar-assertive">
     <h1 class="title">Settings</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeSettings()">Cancel</button>
+      <button class="button button-positive" ng-click="applySettings()">Save</button>
+    </div>
+    <div class="buttons">
+      <button class="button" ng-click="closeSettings()">Cancel</button>
     </div>
   </ion-header-bar>
   <ion-content>
     <div class="card">
       <div class="item item-text-wrap">
-        There are no settings available.  Below is an example of what they will look like when they are implemented.
+        These are demo and debug settings for the app.  Most changes should take effect immediately upon tapping 'Save'. These settings will be persisted on the device, so if you have issues, try restarting the app.
       </div>
     </div>
     <form ng-submit="applySettings()">
+      <ul class="list">
+        <li class="item item-toggle">
+           Use RHMAP: {{ settings.fhcloudurl }}
+           <label class="toggle toggle-positive">
+             <input type="checkbox" ng-model="settings.usefhcloud">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+      </ul>
+      <label class="item item-input">
+        <span class="input-label">Override API URI:</span>
+        <input type="text" ng-model="settings.cloudurl" value="{{settings.cloudurl}}">
+      </label>
+
+      <!-- Some examples
       <ul class="list">
         <li class="item item-toggle">
            Flip my bit
@@ -41,8 +62,14 @@
         <ion-radio ng-model="choice" ng-value="'A'">Choose Me</ion-radio>
         <ion-radio ng-model="choice" ng-value="'B'">No! Choose Me</ion-radio>
       </ion-list>
+
       <label class="item">
-        <button class="button button-block button-positive" type="submit">Close</button>
+        <button class="button button-block button-positive" type="submit">Update</button>
+      </label>
+      -->
+
+      <label class="item">
+        <button class="button button-block button-positive" ng-click="showHelpAndFeedback()">Help and Feedback...</button>
       </label>
     </form>
   </ion-content>

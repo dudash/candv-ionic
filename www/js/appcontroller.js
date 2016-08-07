@@ -17,11 +17,17 @@ angular.module('app.controller', ['app.services'])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+
   // Settings Stuff ------------------------
-  $scope.API_VERSION = "v0";
-  $scope.CLOUD_URL = $fh.getCloudURL();
-  $scope.REMOTE_SERVER_API_URL = $scope.CLOUD_URL + "/api/" + $scope.API_VERSION;
-  //$scope.REMOTE_SERVER_API_URL = "http://localhost:8080/api/"+$scope.API_VERSION;
+  SettingsHelper.loadSettingsFromStorage();  // load from storage first
+
+  // OLD HARDCODED - REMOVE!
+  // $scope.CLOUD_URL = $fh.getCloudURL();  // try to request the URL from MAP
+  // if (!$scope.CLOUD_URL) { $scope.CLOUD_URL =  "http://localhost:8080"; }
+  // $scope.API_VERSION = "v0";
+  // $scope.settings.REMOTE_SERVER_API_URL = $scope.CLOUD_URL + "/api/" + $scope.API_VERSION;
+
+  $scope.settings = SettingsHelper.settings;
   $ionicModal.fromTemplateUrl('templates/settings.html', {
     scope: $scope
   }).then(function(settingsModal) {
@@ -35,10 +41,15 @@ angular.module('app.controller', ['app.services'])
   };
   $scope.applySettings = function() {
     console.log('Saving Settings');
-    // TODO set the variables in the global scope
-    // TODO save the variables into storage
+    SettingsHelper.settings = $scope.settings;
+    SettingsHelper.updateCalculatedSettings();  // update due to changes from user
+    SettingsHelper.saveSettingsToStorage(); // save new values to storage
     $scope.closeSettings();
   };
+  $scope.showHelpAndFeedback = function() {
+    // TODO: show info about help and feedback form
+  };
+  
 
   // Login Stuff ------------------------
   // Flag to say if we are logged in or not
@@ -74,10 +85,8 @@ angular.module('app.controller', ['app.services'])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    
     LoginHelper.isLoggedIn = true;
     $scope.isLoggedIn = LoginHelper.isLoggedIn;  // TODO: set this based on success/fail
-
     $scope.closeLogin(); // TODO: close after success, show error otherwise
     $ionicHistory.nextViewOptions({disableBack: true});
     $state.go('app.boardslist');
