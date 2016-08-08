@@ -19,15 +19,7 @@ angular.module('app.controller', ['app.services'])
   //});
 
   // Settings Stuff ------------------------
-  SettingsHelper.loadSettingsFromStorage();  // load from storage first
-
-  // OLD HARDCODED - REMOVE!
-  // $scope.CLOUD_URL = $fh.getCloudURL();  // try to request the URL from MAP
-  // if (!$scope.CLOUD_URL) { $scope.CLOUD_URL =  "http://localhost:8080"; }
-  // $scope.API_VERSION = "v0";
-  // $scope.settings.REMOTE_SERVER_API_URL = $scope.CLOUD_URL + "/api/" + $scope.API_VERSION;
-
-  $scope.settings = SettingsHelper.settings;
+  $scope.settings = SettingsHelper.loadSettingsFromStorage();  // load from storage first
   $ionicModal.fromTemplateUrl('templates/settings.html', {
     scope: $scope
   }).then(function(settingsModal) {
@@ -40,7 +32,6 @@ angular.module('app.controller', ['app.services'])
     $scope.settingsModal.hide();
   };
   $scope.applySettings = function() {
-    console.log('Saving Settings');
     SettingsHelper.settings = $scope.settings;
     SettingsHelper.updateCalculatedSettings();  // update due to changes from user
     SettingsHelper.saveSettingsToStorage(); // save new values to storage

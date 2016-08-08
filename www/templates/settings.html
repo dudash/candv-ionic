@@ -11,6 +11,9 @@
   </ion-header-bar>
   <ion-content>
     <div class="card">
+      <div class="item item-divider">
+        Note:
+      </div>
       <div class="item item-text-wrap">
         These are demo and debug settings for the app.  Most changes should take effect immediately upon tapping 'Save'. These settings will be persisted on the device, so if you have issues, try restarting the app.
       </div>
@@ -18,19 +21,24 @@
     <form ng-submit="applySettings()">
       <ul class="list">
         <li class="item item-toggle">
-           Use RHMAP: {{ settings.fhcloudurl }}
-           <label class="toggle toggle-positive">
-             <input type="checkbox" ng-model="settings.usefhcloud">
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-           </label>
-        </li>
-      </ul>
-      <label class="item item-input">
-        <span class="input-label">Override API URI:</span>
-        <input type="text" ng-model="settings.cloudurl" value="{{settings.cloudurl}}">
-      </label>
+         Use RHMAP Cloud App
+         <label class="toggle toggle-positive">
+           <input type="checkbox" ng-model="settings.usefhcloud">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+         <div class="card">
+          <div class="item item-text-wrap">
+          Cloud app URI: {{ settings.fhcloudurl }}
+          </div>
+        </div>
+      </li>
+    </ul>
+    <label class="item item-input">
+      <span class="input-label">Override Cloud URI:</span>
+      <input type="text" ng-model="settings.cloudurl" value="{{settings.cloudurl}}">
+    </label>
 
       <!-- Some examples
       <ul class="list">
@@ -66,11 +74,11 @@
       <label class="item">
         <button class="button button-block button-positive" type="submit">Update</button>
       </label>
-      -->
+    -->
 
-      <label class="item">
-        <button class="button button-block button-positive" ng-click="showHelpAndFeedback()">Help and Feedback...</button>
-      </label>
-    </form>
-  </ion-content>
+    <label class="item">
+      <button class="button button-block button-positive" ng-click="showHelpAndFeedback()">Help and Feedback...</button>
+    </label>
+  </form>
+</ion-content>
 </ion-modal-view>
