@@ -7,22 +7,22 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
 .controller('BoardslistCtrl', function($scope, BoardsList) {
 
   $scope.boards = [];
-  BoardsList.getBoards($scope.REMOTE_SERVER_API_URL)
+  BoardsList.getBoards($scope.settings.REMOTE_SERVER_API_URL)
     .then(function(data) {
       $scope.boards = data;
     }).catch(function() {
-      alert('getBoards - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
+      alert('getBoards - error getting data from the server: ' + $scope.settings.REMOTE_SERVER_API_URL);
   });
 
   // --- Get data to refresh view ---
   $scope.doRefresh = function() {
     // pull from server using service
-    BoardsList.getBoards($scope.REMOTE_SERVER_API_URL)
+    BoardsList.getBoards($scope.settings.REMOTE_SERVER_API_URL)
       .then(function(data) {
         $scope.boards = data;
         $scope.$broadcast('scroll.refreshComplete');
       }).catch(function() {
-        alert('getBoards - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
+        alert('getBoards - error getting data from the server: ' + $scope.settings.REMOTE_SERVER_API_URL);
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
@@ -34,21 +34,21 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
   $scope.clipboardRaw = '';
   $scope.items = [];
   $scope.viewShowDelete = false;
-  BoardItems.getItems($scope.REMOTE_SERVER_API_URL)
+  BoardItems.getItems($scope.settings.REMOTE_SERVER_API_URL)
     .then(function(data) {
       $scope.items = data;
     }).catch(function() {
-      alert('getItems - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
+      alert('getItems - error getting data from the server: ' + $scope.settings.REMOTE_SERVER_API_URL);
   });
 
   // --- Get data to refresh view ---
   $scope.doRefresh = function() {
-    BoardItems.getItems($scope.REMOTE_SERVER_API_URL)
+    BoardItems.getItems($scope.settings.REMOTE_SERVER_API_URL)
       .then(function(data) {
         $scope.items = data;
         $scope.$broadcast('scroll.refreshComplete');
       }).catch(function() {
-        alert('getItems - error getting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
+        alert('getItems - error getting data from the server: ' + $scope.settings.REMOTE_SERVER_API_URL);
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
@@ -77,11 +77,11 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
 
   // --- Delete an Item  ---
   $scope.deleteItem = function(item) {
-    BoardItems.deleteItem($scope.REMOTE_SERVER_API_URL, item)
+    BoardItems.deleteItem($scope.settings.REMOTE_SERVER_API_URL, item)
       .then(function(status) {
         $scope.items.splice($scope.items.indexOf(item), 1);  // clear it from the local list
       }).catch(function() {
-        alert('deleteItem - error deleting data from the server: ' + $scope.REMOTE_SERVER_API_URL);
+        alert('deleteItem - error deleting data from the server: ' + $scope.settings.REMOTE_SERVER_API_URL);
     });
   };
 
@@ -106,11 +106,11 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
     inputPopup.then(function(res) {
       if (res == null) return;
       var item = {"raw": $scope.popupData.rawtext};
-      BoardItems.addItem($scope.REMOTE_SERVER_API_URL, item)
+      BoardItems.addItem($scope.settings.REMOTE_SERVER_API_URL, item)
         .then(function(data) {
           $scope.items.unshift(item);
         }).catch(function() {
-          alert('addItem - error adding data from the server: '+ $scope.REMOTE_SERVER_API_URL);
+          alert('addItem - error adding data from the server: '+ $scope.settings.REMOTE_SERVER_API_URL);
       });
     });
   };
@@ -122,11 +122,11 @@ angular.module('board.controllers', ['ng-mfb', 'board.services'])
         console.log("got text from clipboard: " + result);
         $scope.clipboardRaw = result;
         var item = {"raw": result};
-        BoardItems.addItem($scope.REMOTE_SERVER_API_URL, item)
+        BoardItems.addItem($scope.settings.REMOTE_SERVER_API_URL, item)
           .then(function(data) {
             $scope.items.unshift(item);
           }).catch(function() {
-            alert('addItem - error adding data from the server: ' + $scope.REMOTE_SERVER_API_URL);
+            alert('addItem - error adding data from the server: ' + $scope.settings.REMOTE_SERVER_API_URL);
         });
       } else {
         console.error("Clipboard empty");

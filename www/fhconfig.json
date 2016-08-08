@@ -1,9 +1,9 @@
 {
   "WARNING": "DO NOT CHECK THIS FILE INTO GITHUB WITH PRIVATE KEYS",
-  "INFO": "Replace the <XXX> with your mobile application platform values and remove these top two items",
-  "host": "<RHMAP Core host>",
-  "projectid": "<Project ID>",
-  "connectiontag": "<Connection tag>",
-  "appid": "<Client App ID>",
-  "appkey": "<Client App API key>"
+  "INFO": "Replace the <XXX> with your mobile application platform values",
+  "appid": "<XXX>",
+  "appkey": "<XXX>",
+  "connectiontag": "<XXX>",
+  "host": "<XXX>",
+  "projectid": "<XXX>"
 }

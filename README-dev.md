@@ -11,7 +11,7 @@ Here are some tips about working with this source code
 ### Using FH APIs vs the CandV REST API
 You can swap out the default use of the CandV REST API and utilize Feed Henry Sync API. 
 This takes advantage of the features in the Red Hat Mobile Application Platform (MAP)
-and eliminates the need to run a CandV server.  It also give the app an added benefit 
+and eliminates the need to run a CandV server.  It also gives the app an added benefit 
 of [online/offline sync][2] support and use of the platform authentication for login
 which don't exist when using the CandV REST API.
 
